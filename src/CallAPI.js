@@ -5,8 +5,25 @@ import config from './config';
 class CallAPI {
 
     login(data){
+        let url = config.api_login
+        const details = data.email + ':' + data.password
+        const details64 = Buffer.from(details).toString('base64')
 
+        return axios({
+            method: 'post',
+            url: url,
+            headers: {
+                'Authorization': 'Basic ' + details64
+            }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            return err
+        })
     }
+
     logout(data){
 
     }

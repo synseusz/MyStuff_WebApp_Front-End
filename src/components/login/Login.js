@@ -1,44 +1,40 @@
 import React, { Component } from 'react';
-import './Signup.css';
+import './Login.css';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import CallAPI from '../../CallAPI';
-import Login from '../login/Login'
+import Signup from '../signup/Signup';
 
-class Signup extends Component {
-
+class Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            currentView: "signup"
+            currentView: "login"
         }
+
+        //bind
         this.onClick = this.onClick.bind(this);
     }
 
     onClick(){
-        this.setState({currentView:"login"})
+        this.setState({currentView:"signup"})
     }
 
-    SignupSchema = Yup.object().shape({
+    LoginSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email')
-            .required('Field required'),
+            .required('Field required!'),
         password: Yup.string()
             .min(2, 'Too Short!')
             .max(16, 'Too Long!')
-            .required('Field required'),
-        rePassword: Yup.string()
-            .min(2, 'Too Short!')
-            .max(16, 'Too Long!')
-            .required('Field required')
-            .oneOf([Yup.ref('password'), null]),
+            .required('Field required!'),
     });
 
 
     render() {
 
-        if (this.state.currentView === "signup") {
+        if (this.state.currentView === "login") {
             return (
 
                 <div>
@@ -46,22 +42,29 @@ class Signup extends Component {
                         initialValues={{
                             email: '',
                             password: '',
-                            rePassword: '',
                         }}
-                        validationSchema={this.SignupSchema}
+                        validationSchema={this.LoginSchema}
                         onSubmit={values => {
                             // same shape as initial values
                             let data = {
                                 email: values.email,
                                 password: values.password
                             }
-                            new CallAPI().addUser(data)
-                            this.setState({ currentView: "home" })
+
+                            new CallAPI().login(data).then(res => {
+                                if(res.status === 201){
+                                    this.setState({ currentView: "loggedin" })
+                                }
+                                else{
+                                    this.setState({currentView: "notloggedin"})
+                                }
+                            })
+                            
                         }}
                     >
                         {({ errors, touched }) => (
-                            <Form className="signupForm">
-                                <h1>Signup</h1>
+                            <Form className="loginForm">
+                                <h1>Login</h1>
                                 <label htmlFor="email">E-mail</label>
                                 <Field placeholder="Enter your email address" className="input" name="email" type="email" />
                                 <div className="warningArea">
@@ -78,18 +81,10 @@ class Signup extends Component {
                                     ) : null}
                                 </div>
 
-                                <label htmlFor="password">Repeat Password</label>
-                                <Field name="rePassword" type="password" className="input" placeholder="Repeat your password" />
-                                <div className="warningArea">
-                                    {errors.email && touched.email ? (
-                                        <div className="warning">{errors.email}</div>
-                                    ) : null}
-                                </div>
-
                                 <div className="buttonsContainer">
-                                    <button type="submit">Submit</button>
-                                    <p>Already have account?</p>
-                                    <button onClick={this.onClick} type="button" className="loginButton">Log In</button>
+                                    <button type="submit">Log In</button>
+                                    <p>Don't have account yet?</p>
+                                    <button onClick={this.onClick} type="button" className="loginButton">Sign Up</button>
                                 </div>
                             </Form>
                         )}
@@ -97,16 +92,21 @@ class Signup extends Component {
                 </div>
             );
         }
-        else if(this.state.currentView === 'home'){
+        else if(this.state.currentView === 'loggedin'){
             return (
-                <h1>Signup complete</h1>
+                <h1>Welcome </h1>
             )
         }
-        else if(this.state.currentView === 'login'){
+        else if(this.state.currentView === 'signup'){
             return (
-                <Login />
+                <Signup />
+            )
+        }
+        else if(this.state.currentView === 'notloggedin'){
+            return (
+                <h1>Wypierdalaj</h1>
             )
         }
     }
 }
-export default Signup;
+export default Login
