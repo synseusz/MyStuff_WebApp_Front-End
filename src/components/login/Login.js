@@ -10,15 +10,16 @@ class Login extends Component {
         super(props);
 
         this.state = {
-            currentView: "login"
+            currentView: "login",
+            wrongDetailsMsg: "hidden"
         }
 
         //bind
         this.onClick = this.onClick.bind(this);
     }
 
-    onClick(){
-        this.setState({currentView:"signup"})
+    onClick() {
+        this.setState({ currentView: "signup" })
     }
 
     LoginSchema = Yup.object().shape({
@@ -46,20 +47,20 @@ class Login extends Component {
                         validationSchema={this.LoginSchema}
                         onSubmit={values => {
                             // same shape as initial values
-                            let data = {
+                            let userData = {
                                 email: values.email,
                                 password: values.password
                             }
 
-                            new CallAPI().login(data).then(res => {
-                                if(res.status === 201){
-                                    this.setState({ currentView: "loggedin" })
-                                }
-                                else{
-                                    this.setState({currentView: "notloggedin"})
-                                }
-                            })
-                            
+                            new CallAPI().login(userData)
+                                .then(res => {
+                                    if (res.status === 201) {
+                                        this.setState({ currentView: "loggedin" })
+                                    }
+                                }).catch(err => {
+                                    this.setState({ wrongDetailsMsg: "visible" })
+                                })
+
                         }}
                     >
                         {({ errors, touched }) => (
@@ -76,9 +77,16 @@ class Login extends Component {
                                 <label htmlFor="password">Password</label>
                                 <Field name="password" type="password" className="input" placeholder="Enter your pasword" />
                                 <div className="warningArea">
-                                    {errors.email && touched.email ? (
-                                        <div className="warning">{errors.email}</div>
+                                    {errors.password && touched.password ? (
+                                        <div className="warning">{errors.password}</div>
                                     ) : null}
+                                </div>
+
+                                <div className="warningAreaBottom">
+                                    {this.state.wrongDetailsMsg === "visible" ? (
+                                        <div><b>Wrong email or password!</b></div>
+                                    ) : null
+                                    }
                                 </div>
 
                                 <div className="buttonsContainer">
@@ -92,19 +100,14 @@ class Login extends Component {
                 </div>
             );
         }
-        else if(this.state.currentView === 'loggedin'){
+        else if (this.state.currentView === 'loggedin') {
             return (
-                <h1>Welcome </h1>
+                <h1>Welcome</h1>
             )
         }
-        else if(this.state.currentView === 'signup'){
+        else if (this.state.currentView === 'signup') {
             return (
                 <Signup />
-            )
-        }
-        else if(this.state.currentView === 'notloggedin'){
-            return (
-                <h1>Wypierdalaj</h1>
             )
         }
     }

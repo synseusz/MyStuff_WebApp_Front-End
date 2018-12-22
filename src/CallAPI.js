@@ -16,12 +16,6 @@ class CallAPI {
                 'Authorization': 'Basic ' + details64
             }
         })
-        .then(res => {
-            return res
-        })
-        .catch(err => {
-            return err
-        })
     }
 
     logout(data){
@@ -30,15 +24,9 @@ class CallAPI {
     addUser(data){
         let url = config.api_add_user
 
-        axios.post(url, {
+        return axios.post(url, {
             email: data.email,
             password: data.password
-        })
-        .then(response => {
-            console.log(response)
-        })
-        .catch(err => {
-            console.log(err)
         })
     }
     getUser(data){

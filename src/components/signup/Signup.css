@@ -9,6 +9,11 @@ h1{
 .warningArea {
     height: 30px;
 }
+.warningAreaBottom {
+    margin-bottom: 15px;
+    text-align: center;
+    color: red;
+}
 .warning {
     text-align: left;
     color: red;
@@ -48,6 +53,7 @@ input:focus {
 }
 
 .signupForm button:hover {
+    font-weight: bold;
     color: black;
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }

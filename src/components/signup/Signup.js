@@ -11,13 +11,14 @@ class Signup extends Component {
         super(props);
 
         this.state = {
-            currentView: "signup"
+            currentView: "signup",
+            existingUser: "hidden"
         }
         this.onClick = this.onClick.bind(this);
     }
 
-    onClick(){
-        this.setState({currentView:"login"})
+    onClick() {
+        this.setState({ currentView: "login" })
     }
 
     SignupSchema = Yup.object().shape({
@@ -56,7 +57,14 @@ class Signup extends Component {
                                 password: values.password
                             }
                             new CallAPI().addUser(data)
-                            this.setState({ currentView: "home" })
+                                .then(response => {
+                                    if (response.status === 201) {
+                                        this.setState({ currentView: "registerSuccessful" })
+                                    }
+                                }).catch(err => {
+                                    this.setState({ existingUser: "visible" })
+                                })
+
                         }}
                     >
                         {({ errors, touched }) => (
@@ -85,6 +93,13 @@ class Signup extends Component {
                                         <div className="warning">{errors.email}</div>
                                     ) : null}
                                 </div>
+                                
+                                <div className="warningAreaBottom">
+                                {this.state.existingUser === "visible" ? (
+                                    <div><b>User already exists!</b></div>
+                                ) : null
+                                }
+                                </div>
 
                                 <div className="buttonsContainer">
                                     <button type="submit">Submit</button>
@@ -97,12 +112,12 @@ class Signup extends Component {
                 </div>
             );
         }
-        else if(this.state.currentView === 'home'){
+        else if (this.state.currentView === 'registerSuccessful') {
             return (
                 <h1>Signup complete</h1>
             )
         }
-        else if(this.state.currentView === 'login'){
+        else if (this.state.currentView === 'login') {
             return (
                 <Login />
             )

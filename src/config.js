@@ -6,6 +6,8 @@ class config  {
     static api_path = '/api/v1.0';
     static api_add_user = config.api_host + config.api_path + '/users'
     static api_login = config.api_host + config.api_path + '/login'
+    static api_get_blogs = config.api_host + config.api_path + '/blogs';
+
 }
 
 export default config;
