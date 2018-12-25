@@ -1,16 +1,17 @@
-//import react
 import React, { Component } from 'react';
-//import CSS
+
 import './App.css';
 
 //import components
 import Header from './components/header/Header';
 import Grid from './components/grid/Grid';
 import Signup from './components/signup/Signup';
-
+import Login from './components/login/Login';
+import AddAdvert from './components/advert/Add';
 import CallAPI from './CallAPI';
 
 import react_logo from './img/logo.svg';
+
 
 //new class for App
 class App extends Component {
@@ -19,19 +20,19 @@ class App extends Component {
     
     super(props);
     
-    //initial state
+    //initial states
     this.state = {
       currentView: "",
-      items: [],
-      homeItems: [],
-      currentArticle: null
+      adverts: [],
+      homeAdverts: [],
+      currentAdvert: null
     };
     
 
     this.onSearch = this.onSearch.bind(this);
     this.showHome = this.showHome.bind(this);
-    this.handleThumbnailClicked = this.handleThumbnailClicked.bind(this);
-    this.updateBlogsData = this.updateBlogsData.bind(this);
+    this.handleAdvertClicked = this.handleAdvertClicked.bind(this);
+    this.updateAdvertData = this.updateAdvertData.bind(this);
 
   }
 
@@ -40,56 +41,56 @@ class App extends Component {
   }
 
   showHome() {
-    if (this.state.currentArticle !== null)
-      this.setState({ currentArticle: null });
+    if (this.state.currentAdvert !== null)
+      this.setState({ currentAdvert: null });
 
     this.setState({ currentView: "home" });
   }
 
-  handleThumbnailClicked(key) {
+  handleAdvertClicked(key) {
 
-    console.log("item with id:" + key + " was clicked");
+    console.log("advert with id:" + key + " was clicked");
 
     if (this.state.currentView !== "home")
       return;
 
-    let len = this.state.items.length;
+    let len = this.state.adverts.length;
 
     for (let i = 0; i < len; i++) {
 
-      if (this.state.items[i].id === key) {
+      if (this.state.adverts[i].id === key) {
 
-        let item = Object.assign({}, this.state.items[i]);
+        let advert = Object.assign({}, this.state.adverts[i]);
 
         this.setState({
-          currentView: "article",
-          currentArticle: item
+          currentView: "advert",
+          currentAdvert: advert
         });
       }
     }
   }
 
-  updateBlogsData(data) {
+  updateAdvertData(data) {
 
-    let data2 = data.map(item => {
+    let data2 = data.map(advert => {
 
-      let shortBody = item.body.substring(0, 128);
+      let shortBody = advert.description.substring(0, 128);
 
       return {
-        id: item.id,
-        title: item.title,
-        authorId: item.authorId,
-        body: shortBody,
-        registrationDate: item.registrationDate,
-        photo: item.photo
+        id: advert.id,
+        title: advert.title,
+        authorId: advert.authorId,
+        description: shortBody,
+        registrationDate: advert.registrationDate,
+        photo: advert.photo
       }
 
     });
 
     this.setState({
-      items: data,
-      homeItems: data2,
-      currentView: "home"
+      adverts: data,
+      homeAdverts: data2,
+      currentView: "AddAdvert"
     });
 
   }
@@ -97,21 +98,21 @@ class App extends Component {
   componentDidMount(){
 
     //fetch the data
-    new CallAPI().getBlogs(12, 1, this.updateBlogsData)
+    new CallAPI().getAdverts(12, 1, this.updateAdvertData)
   }
 
   render() {
     let whatToRender
 
     if(this.state.currentView === "home"){
-      whatToRender = <Grid items={this.state.homeItems} colClass="col-m-3" onClick={this.handleThumbnailClicked} rowLength={4} />
+      whatToRender = <Grid adverts={this.state.homeAdverts} colClass="col-m-3" onClick={this.handleAdvertClicked} rowLength={4} />
     }
-    else if(this.state.currentView === "article"){
-      let tempArr = [this.state.currentArticle];
-      whatToRender = <Grid items={tempArr} colClass="col-m-6" onClick={this.handleThumbnailClicked} rowLength={1} />;
+    else if(this.state.currentView === "advert"){
+      let tempArr = [this.state.currentAdvert];
+      whatToRender = <Grid adverts={tempArr} colClass="col-m-6" onClick={this.handleAdvertClicked} rowLength={1} />;
     }
     else if(this.state.currentView === "login"){
-      whatToRender = null;
+      whatToRender = <Login />;
     }
     else if(this.state.currentView === "logout"){
       whatToRender = null;
@@ -122,11 +123,14 @@ class App extends Component {
     else if(this.state.currentView === "signup"){
       whatToRender = <Signup />;
     }
+    else if(this.state.currentView === "AddAdvert"){
+      whatToRender = <AddAdvert />;
+    }
 
     //after rendering the header, render whatToRender
     return (
       <div>
-        <Header title="304CEM-CW" logo={react_logo} onSearchClick={this.onSearch} onClickTitle={this.showHome} />
+        <Header title="My Stuff" logo={react_logo} onSearchClick={this.onSearch} onClickTitle={this.showHome} />
         {whatToRender}
       </div>
     );
@@ -134,5 +138,4 @@ class App extends Component {
 
 }
 
-//finally do not forget to export the component
 export default App;

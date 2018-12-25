@@ -35,15 +35,15 @@ class CallAPI {
     getUsers(data){
 
     }
-    updateUSer(data){
+    updateUser(data){
 
     }
     deleteUser(data){
 
     }
-    getBlogs(pageLength, pageNumber, callback){
+    getAdverts(pageLength, pageNumber, callback){
         
-        let url = config.api_get_blogs;
+        let url = config.api_get_adverts;
         axios.get(url,{ 
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -61,8 +61,16 @@ class CallAPI {
     getBlog(id){
 
     }
-    createBlog(data){
+    addAdvert(data){
+        let url = config.api_add_advert
 
+        axios.post(url, data)
+        .then(res => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
     updateBlog(data){
 
