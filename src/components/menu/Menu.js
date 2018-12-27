@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import './Menu.css';
-import Login from '../login/Login'
-import Signup from '../signup/Signup'
+
 
 
 class Menu extends Component {
@@ -10,7 +10,6 @@ class Menu extends Component {
         super(props);
 
         this.state = {
-            test: "test",
             currentView: ""
         }
         this.onLoginClick = this.onLoginClick.bind(this)
@@ -19,37 +18,24 @@ class Menu extends Component {
 
     onLoginClick(event) {
         event.preventDefault();
-        this.setState({ currentView: "login" })
     }
 
     onSignupClick(event) {
         event.preventDefault();
-        this.setState({ currentView: "signup" })
     }
 
 
     render() {
-        let whatToRender
 
-        if (this.state.currentView === "login") {
-            whatToRender = <Login />
-        }
-
-        else if (this.state.currentView === "signup") {
-            whatToRender = <Signup />   
-        }
 
         return (
 
-            <div>
                 <div className="menuBar">
-                    <div className="RsideButtons">
-                        <button onClick={this.onLoginClick} type="button" className="loginB">Log In</button>
-                        <button onClick={this.onSignupClick} type="button" className="signupB"> Sign Up</button>
-                    </div>
+                        <Link to="/" className="addAdvertB">Home</Link>
+                        <Link to="/addAdvert" className="addAdvertB">Add Advert</Link>
+                        <Link to="/signup" className="signupB">Sign Up</Link>
+                        <Link to="/login" className="loginB">Log In</Link>
                 </div>
-                {whatToRender}
-            </div>
 
         )
     }

@@ -44,7 +44,7 @@ class CallAPI {
     getAdverts(pageLength, pageNumber, callback){
         
         let url = config.api_get_adverts;
-        axios.get(url,{ 
+        return axios.get(url,{ 
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type' : 'application/json'        

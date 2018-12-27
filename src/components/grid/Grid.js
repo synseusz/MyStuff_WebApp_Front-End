@@ -37,8 +37,12 @@ class Grid extends Component {
                 {fillEmptySpace}
                 {adverts.map((advert, index) =>
                     <div className={this.props.colClass} key={advert.id}>
-                        <Advert   image={advert.photo} 
-                                title={advert.title} 
+                        <Advert image={advert.photo} 
+                                title={advert.title}
+                                category={advert.category}
+                                itemCondition={advert.ItemCondition}
+                                askingPrice={advert.askingPrice} 
+                                city={advert.city}
                                 description={advert.description} 
                                 onClick = {this.props.onClick}
                                 id ={advert.id}

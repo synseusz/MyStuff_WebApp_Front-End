@@ -3,7 +3,7 @@ import './Login.css';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import CallAPI from '../../CallAPI';
-import Signup from '../signup/Signup';
+import {Link} from 'react-router-dom'
 
 class Login extends Component {
     constructor(props) {
@@ -92,7 +92,7 @@ class Login extends Component {
                                 <div className="buttonsContainer">
                                     <button type="submit">Log In</button>
                                     <p>Don't have account yet?</p>
-                                    <button onClick={this.onClick} type="button" className="loginButton">Sign Up</button>
+                                    <Link to="/signup"><button onClick={this.onClick} type="button" className="loginButton">Sign Up</button></Link>
                                 </div>
                             </Form>
                         )}
@@ -103,11 +103,6 @@ class Login extends Component {
         else if (this.state.currentView === 'loggedin') {
             return (
                 <h1>Welcome</h1>
-            )
-        }
-        else if (this.state.currentView === 'signup') {
-            return (
-                <Signup />
             )
         }
     }

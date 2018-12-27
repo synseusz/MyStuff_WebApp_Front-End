@@ -41,7 +41,7 @@ class Header extends Component {
             
             <div>
             <div className="header" style={this.state.headerStyle}>
-                <img src={this.props.logo} alt="React logo" /><a href="#default" className="logo" onClick={this.handleTitleClick}> {this.props.title}</a>
+                <img src={this.props.logo} alt="React logo" /><a href="/" className="logo" onClick={this.handleTitleClick}>{this.props.title}</a>
                 <div className="header-right">
                     <div className="search-container">
                         <form action="">

@@ -3,7 +3,7 @@ import './Signup.css';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import CallAPI from '../../CallAPI';
-import Login from '../login/Login'
+import {Link} from 'react-router-dom'
 
 class Signup extends Component {
 
@@ -104,7 +104,7 @@ class Signup extends Component {
                                 <div className="buttonsContainer">
                                     <button type="submit">Submit</button>
                                     <p>Already have account?</p>
-                                    <button onClick={this.onClick} type="button" className="loginButton">Log In</button>
+                                    <Link to="/login"><button onClick={this.onClick} className="loginButton">Log In</button></Link>
                                 </div>
                             </Form>
                         )}
@@ -115,11 +115,6 @@ class Signup extends Component {
         else if (this.state.currentView === 'registerSuccessful') {
             return (
                 <h1>Signup complete</h1>
-            )
-        }
-        else if (this.state.currentView === 'login') {
-            return (
-                <Login />
             )
         }
     }
