@@ -27,11 +27,12 @@ class Header extends Component {
         this.props.onSearchClick(this.state.searchTerm);  
     }
 
-    handleTitleClick(event){
+    handleTitleClick(){
 
         if(this.props.onClickTitle != null){
             this.props.onClickTitle();
         }
+
             
     }
   
@@ -51,7 +52,7 @@ class Header extends Component {
                     </div>
                 </div>
             </div>
-            <Menu />
+            <Menu updateAdvertData={this.props.updateAdvertData}/>
             </div>
             
             

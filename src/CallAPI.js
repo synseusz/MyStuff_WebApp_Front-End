@@ -64,13 +64,17 @@ class CallAPI {
     addAdvert(data){
         let url = config.api_add_advert
 
-        axios.post(url, data)
+        return axios.post(url, data)
+    }
+    sendMessage(data){
+        let url = config.api_send_message
+
+        return axios.post(url, data)
         .then(res => {
-            console.log(res)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            console.log(res.data);
+        }).catch( (error) => {
+            console.log("the following error has occured:" + error);
+        });
     }
     updateBlog(data){
 

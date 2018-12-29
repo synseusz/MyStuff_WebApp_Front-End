@@ -7,25 +7,24 @@ class Advert extends Component {
         super(props);
 
         this.state = {
-            advStyle: { backgroundColor: this.props.backgroundColor },
-            bookmarked: false,
             fullAdvert: false
         };
 
         this.onClickHandler = this.onClickHandler.bind(this);
     }
 
-    onClickHandler(event) {
+    async onClickHandler(event) {
 
         event.preventDefault();
-        this.setState({ fullAdvert: true })
         this.props.onClick(this.props.id);
+        await this.setState({ fullAdvert: true })
         
     }
 
     render() {
-
-
+        localStorage.setItem("recipient", this.props.author)
+        const test = localStorage.getItem("recipient")
+        console.log(test)
         if (this.state.fullAdvert === true) {
             return (
 
@@ -34,6 +33,7 @@ class Advert extends Component {
                     <div className="container">
                         <button className="linkButton"><h4><b>{this.props.title}</b></h4></button>
                         <hr />
+                        <p><b>Author: </b>{this.props.author}</p>
                         <p><b>Category: </b>{this.props.category}</p>
                         <p><b>Condition: </b>{this.props.itemCondition}</p>
                         <p><b>Price: </b>£{this.props.askingPrice}</p>
@@ -49,7 +49,8 @@ class Advert extends Component {
             return (
 
                 <div className="card" onClick={this.onClickHandler}>
-                    <img src={this.props.image} alt={this.props.imgAlt}  style={{ width: '100%', cursor: "pointer" }} />
+                    <span className="priceArea">£{this.props.askingPrice}</span>
+                    <img src={this.props.image} alt={this.props.imgAlt}  style={{ width: '100%'}} />
                     <div className="container">
                         <button onClick={this.onClickHandler} className="linkButton"><h4><b>{this.props.title}</b></h4></button>
                         <hr />

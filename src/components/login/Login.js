@@ -3,24 +3,21 @@ import './Login.css';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import CallAPI from '../../CallAPI';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 class Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            currentView: "login",
-            wrongDetailsMsg: "hidden"
+            wrongDetailsMsg: "hidden",
+            redirectToHome: false
         }
 
         //bind
-        this.onClick = this.onClick.bind(this);
+
     }
 
-    onClick() {
-        this.setState({ currentView: "signup" })
-    }
 
     LoginSchema = Yup.object().shape({
         email: Yup.string()
@@ -34,8 +31,9 @@ class Login extends Component {
 
 
     render() {
-
-        if (this.state.currentView === "login") {
+        if(this.state.redirectToHome === true){
+            return <Redirect to="/" />
+        }
             return (
 
                 <div>
@@ -51,11 +49,12 @@ class Login extends Component {
                                 email: values.email,
                                 password: values.password
                             }
-
+                            
                             new CallAPI().login(userData)
                                 .then(res => {
                                     if (res.status === 201) {
-                                        this.setState({ currentView: "loggedin" })
+                                        localStorage.setItem("MyStuffLogin", values.email)
+                                        this.setState({redirectToHome: true})
                                     }
                                 }).catch(err => {
                                     this.setState({ wrongDetailsMsg: "visible" })
@@ -92,7 +91,7 @@ class Login extends Component {
                                 <div className="buttonsContainer">
                                     <button type="submit">Log In</button>
                                     <p>Don't have account yet?</p>
-                                    <Link to="/signup"><button onClick={this.onClick} type="button" className="loginButton">Sign Up</button></Link>
+                                    <Link to="/signup"><button type="button" className="loginButton">Sign Up</button></Link>
                                 </div>
                             </Form>
                         )}
@@ -100,11 +99,6 @@ class Login extends Component {
                 </div>
             );
         }
-        else if (this.state.currentView === 'loggedin') {
-            return (
-                <h1>Welcome</h1>
-            )
-        }
     }
-}
+
 export default Login

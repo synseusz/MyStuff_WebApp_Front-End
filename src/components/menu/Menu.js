@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import './Menu.css';
+import CallAPI from '../../CallAPI';
 
 
 
@@ -10,34 +11,41 @@ class Menu extends Component {
         super(props);
 
         this.state = {
-            currentView: ""
+
         }
-        this.onLoginClick = this.onLoginClick.bind(this)
-        this.onSignupClick = this.onSignupClick.bind(this);
+        this.refreshAdverts=this.refreshAdverts.bind(this)
     }
 
-    onLoginClick(event) {
-        event.preventDefault();
+    handleLogout(e){
+        localStorage.removeItem("MyStuffLogin")
     }
-
-    onSignupClick(event) {
-        event.preventDefault();
+    refreshAdverts(){
+        new CallAPI().getAdverts(12, 1, this.props.updateAdvertData)
     }
-
 
     render() {
-
-
-        return (
+        const loggedin = localStorage.getItem("MyStuffLogin")
+        if (loggedin) {
+            return (
+                <div className="menuBar">
+                    <Link to="/"  onClick={this.refreshAdverts} className="addAdvertB">Home</Link>
+                    <Link to="/addAdvert" className="addAdvertB">Add Advert</Link>
+                    <a href="/" onClick={this.handleLogout} className="loginB">Logout</a>
+                    <p style={{float: "right"}}><b>{loggedin}</b></p>
+                </div>
+            )
+        }
+        else {
+            return (
 
                 <div className="menuBar">
-                        <Link to="/" className="addAdvertB">Home</Link>
-                        <Link to="/addAdvert" className="addAdvertB">Add Advert</Link>
-                        <Link to="/signup" className="signupB">Sign Up</Link>
-                        <Link to="/login" className="loginB">Log In</Link>
+                    <Link to="/" onClick={this.refreshAdverts} className="addAdvertB">Home</Link>
+                    <Link to="/signup" className="signupB">Sign Up</Link>
+                    <Link to="/login" className="loginB">Log In</Link>
                 </div>
 
-        )
+            )
+        }
     }
 }
 export default Menu;

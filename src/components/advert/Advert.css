@@ -3,7 +3,7 @@
     transition: 0.3s;
     border-radius: 5px;
     position: relative;
-   
+    cursor: pointer;
 }
 
 .card:hover {
@@ -12,6 +12,7 @@
 
 img {
     border-radius: 5px 5px 0 0;
+
 }
 
 .container {
@@ -26,18 +27,11 @@ img {
     /*border is optional*/
     cursor: pointer;
 }
-
-.clickableAwesomeFont {
-    cursor: pointer;
-}
-
-.bookmark {
-    margin-top : -4px;
-    position: absolute;
-    left: 85%;
-    color:white;
-}
-
-.bookmarked{
-    color:blue;
+.priceArea {
+    padding: 2%;
+    font-weight: bold;
+    background-color: lightgray;
+    border-radius: 25px;
+    border-bottom-left-radius: 0px;
+    font-size: 19px;
 }

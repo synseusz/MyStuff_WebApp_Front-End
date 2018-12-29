@@ -13,6 +13,7 @@ import AddAdvert from './components/advert/Add';
 import CallAPI from './CallAPI';
 
 import logo from './img/CU_Logo.png';
+import AddMessage from './components/messages/Add';
 
 
 //new class for App
@@ -27,15 +28,15 @@ class App extends Component {
       currentView: "",
       adverts: [],
       homeAdverts: [],
-      currentAdvert: null
+      currentAdvert: null,
     };
 
     this.onSearch = this.onSearch.bind(this);
     this.showHome = this.showHome.bind(this);
     this.handleAdvertClicked = this.handleAdvertClicked.bind(this);
     this.updateAdvertData = this.updateAdvertData.bind(this);
-
   }
+
 
   onSearch(term) {
     console.log("search on term:" + term);
@@ -60,9 +61,7 @@ class App extends Component {
     for (let i = 0; i < len; i++) {
 
       if (this.state.adverts[i].id === key) {
-
         let advert = Object.assign({}, this.state.adverts[i]);
-
         this.setState({
           currentView: "advert",
           currentAdvert: advert
@@ -81,7 +80,7 @@ class App extends Component {
         id: advert.id,
         title: advert.title,
         description: shortBody,
-        registrationDate: advert.registrationDate,
+        askingPrice: advert.askingPrice,
         photo: advert.photo
       }
 
@@ -98,15 +97,12 @@ class App extends Component {
 
   //TODO zobaczyc czy to ma wplyw na odswiezanie
   componentDidMount() {
-    
+
     //fetch the data
     new CallAPI().getAdverts(12, 1, this.updateAdvertData)
-      
+
   }
-  componentWillReceiveProps() {
-    new CallAPI().getAdverts(12, 1, this.updateAdvertData)
-    
-  }
+
 
   render() {
     let whatToRender
@@ -124,7 +120,7 @@ class App extends Component {
 
       <Router>
         <div>
-          <Header title="My Stuff" logo={logo} onSearchClick={this.onSearch} onClickTitle={this.showHome} />
+          <Header title="My Stuff" updateAdvertData={this.updateAdvertData} logo={logo} onSearchClick={this.onSearch} onClickTitle={this.showHome} />
           <Route path="/" exact render={
             () => {
               return (
@@ -157,6 +153,15 @@ class App extends Component {
               return (
                 <div>
                   <AddAdvert />
+                </div>
+              )
+            }
+          } />
+          <Route path="/message" render={
+            () => {
+              return (
+                <div>
+                  <AddMessage />
                 </div>
               )
             }

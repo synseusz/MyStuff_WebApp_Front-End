@@ -3,7 +3,7 @@ import './Add.css';
 import CallAPI from '../../CallAPI';
 
 
-class AddAdvert extends Component {
+class AddMessage extends Component {
 
     constructor(props) {
         super(props);
@@ -134,4 +134,4 @@ class AddAdvert extends Component {
         )
     }
 }
-export default AddAdvert;
+export default AddMessage;

@@ -39,6 +39,7 @@ class Grid extends Component {
                     <div className={this.props.colClass} key={advert.id}>
                         <Advert image={advert.photo} 
                                 title={advert.title}
+                                author={advert.author}
                                 category={advert.category}
                                 itemCondition={advert.ItemCondition}
                                 askingPrice={advert.askingPrice} 
@@ -54,6 +55,9 @@ class Grid extends Component {
     }
 
     render() {
+        if (this.props.adverts.length === 0){
+            return <h1>There are currently no adverts</h1>
+        }
 
         console.log("Current adverts displayed: " + this.props.adverts.length);
 
@@ -61,29 +65,29 @@ class Grid extends Component {
             return null;
         }
 
-        var allRows = [];
+        let allRows = [];
         //total length of adverts
-        var len = this.props.adverts.length;
+        let len = this.props.adverts.length;
         //total number of rows
-        var totalRows = len / this.props.rowLength;
+        let totalRows = Math.ceil(len / this.props.rowLength);
         //how many rows we ve got so far
-        var countRows = 0;
+        let countRows = 0;
 
         while(countRows < totalRows){
-            
             let newRow = [];
 
-            for (var i = 0; i < this.props.rowLength; i++){
+            for (let i = 0; i < this.props.rowLength; i++){
                 
                 let currentIndex = i + (countRows * this.props.rowLength);
                 
-                if(currentIndex < len)
+                if(currentIndex < len){
                     newRow.push(this.props.adverts[currentIndex]);
+                }
                
             }
             //increment the rows counter
-            countRows++;
-            allRows.push( this.GridRow(newRow, countRows) );
+            countRows++
+            allRows.push( this.GridRow(newRow, countRows) )
         }
     
         return (
