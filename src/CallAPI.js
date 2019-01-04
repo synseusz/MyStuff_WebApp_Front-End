@@ -50,14 +50,31 @@ class CallAPI {
                 'Content-Type' : 'application/json'        
             }
         }).then(res => {
-            
-            console.log(res.data);
             callback(res.data);
-
         }).catch( (error) => {
             console.log("the following error has occured:" + error);
         });
     }
+    delAdvertById(id){
+        let url = config.api_del_advert_by_id + id
+        return axios.delete(url)
+    }
+    getMessagesByRecipient(callback){
+        const recipient = localStorage.getItem("MyStuffLogin")
+        
+        let url = config.api_get_message_by_recipient + recipient
+
+        return axios.get(url,{ 
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type' : 'application/json'        
+            }
+
+        }
+        )
+      
+    }
+
     getBlog(id){
 
     }
@@ -69,9 +86,9 @@ class CallAPI {
     sendMessage(data){
         let url = config.api_send_message
 
-        return axios.post(url, data)
+        axios.post(url, data)
         .then(res => {
-            console.log(res.data);
+            console.log(res);
         }).catch( (error) => {
             console.log("the following error has occured:" + error);
         });

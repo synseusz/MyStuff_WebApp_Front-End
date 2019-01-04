@@ -9,126 +9,65 @@ class AddMessage extends Component {
         super(props);
 
         this.state = {
-            title: '',
-            categoryValue: '',
-            conditionValue: '',
-            price: '',
-            city: '',
-            description: '',
-            photo: null
+            subject: "",
+            message: "",
+            errSub: false,
+            errMsg: false
         }
 
-        this.handleTitleChange = this.handleTitleChange.bind(this)
-        this.handleCategoryChange = this.handleCategoryChange.bind(this)
-        this.handleConditionChange = this.handleConditionChange.bind(this)
-        this.handlePriceChange = this.handlePriceChange.bind(this)
-        this.handleCityChange = this.handleCityChange.bind(this)
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
-        this.handleFileChange = this.handleFileChange.bind(this)
+        this.handleSubjectChange = this.handleSubjectChange.bind(this)
+        this.handleMessageChange = this.handleMessageChange.bind(this)
         this.onClick = this.onClick.bind(this)
     }
 
-    handleTitleChange(e) {
-        this.setState({ title: e.target.value })
+    handleSubjectChange(e) {
+        this.setState({ subject: e.target.value })
     }
-    handleCategoryChange(e) {
-        this.setState({ categoryValue: e.target.value })
+    handleMessageChange(e) {
+        this.setState({ message: e.target.value })
     }
-    handleConditionChange(e) {
-        this.setState({ conditionValue: e.target.value })
-    }
-    handlePriceChange(e) {
-        this.setState({ price: e.target.value })
-    }
-    handleCityChange(e) {
-        this.setState({ city: e.target.value })
-    }
-    handleDescriptionChange(e) {
-        this.setState({ description: e.target.value })
-    }
-    handleFileChange(e) {
-        this.setState({ photo: e.target.files[0] })
-    }
-    onClick(e) {
-        e.preventDefault();
+    onClick() {
 
         const author = localStorage.getItem("MyStuffLogin")
+        const recipient = localStorage.getItem("recipient")
+        if (this.state.subject === "") {
+            console.log("Please choose a message subject first")
+            this.setState({errSub: true})
+        }
+        if (this.state.message === "") {
+            console.log("Please write your message first")
+            this.setState({errMsg: true})
+        } else {
+            const message = {
+                author: author,
+                recipient: recipient,
+                subject: this.state.subject,
+                message: this.state.message
+            }
 
-        const fd = new FormData()
-        fd.append("author", author)
-        fd.append('title', this.state.title)
-        fd.append('description', this.state.description)
-        fd.append('photo', this.state.photo, this.state.photo.name)
-        fd.append('category', this.state.categoryValue)
-        fd.append('ItemCondition', this.state.conditionValue)
-        fd.append('askingPrice', this.state.price)
-        fd.append('city', this.state.city)
-
-
-        new CallAPI().addAdvert(fd)
-        .then(res =>{
-            console.log(res)
-        }).catch(err => {
-            console.log(err)
-        })
-
-        
-
+            new CallAPI().sendMessage(message)
+        }
     }
 
     render() {
 
         return (
 
-            <form className="addAdvertForm">
+            <form className="addMessageForm">
+                <h1>Contact</h1>
                 <div className="form-group">
-                    <label htmlFor="title"><b>Title:</b></label>
-                    <input type="text" onChange={this.handleTitleChange} className="form-control" id="title" name="title" placeholder="Title" />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="category"><b>Category:</b></label>
-                    <select id="category" onChange={this.handleCategoryChange}>
-                        <option>Select</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Books">Books</option>
-                        <option value="Vehicles">Vehicles</option>
-                        <option value="Clothes">Clothes</option>
-                    </select>
+                    <label htmlFor="subject"><b>Subject:</b></label>
+                    {this.state.errSub===true & this.state.subject===""?<span style={{float: "right", color: "red"}}>Please provide the subject!</span>: null}
+                    <input type="text" onChange={this.handleSubjectChange} className="form-control" id="subject" name="subject" placeholder="Subject" />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="ItemCondition"><b>Condition:</b></label>
-                    <select id="ItemCondition" onChange={this.handleConditionChange}>
-                        <option>Select</option>
-                        <option value="Brand&nbsp;new">Brand new</option>
-                        <option value="Manufacturer&nbsp;refurbished">Manufacturer refurbished</option>
-                        <option value="Slightly&nbsp;used">Slightly used</option>
-                        <option value="Used">Used</option>
-                    </select>
+                    <label htmlFor="message"><b>Message:</b></label>
+                    {this.state.errMsg === true & this.state.message==="" ?<span style={{float: "right", color: "red"}}>Please write your message first!</span>: null}
+                    <textarea className="form-control" onChange={this.handleMessageChange} type="textarea" id="message" placeholder="Your Message" maxLength="1000" rows="7"></textarea>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="price"><b>Price (£):</b></label>
-                    <input type="number" onChange={this.handlePriceChange} placeholder="0" min="0" step="1" data-number-to-fixed="2" data-number-stepfactor="100" className="price" id="askingPrice" />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="city"><b>City:</b></label>
-                    <input type="text" onChange={this.handleCityChange} className="form-control" id="city" name="city" placeholder="City" />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="description"><b>Description:</b></label>
-                    <textarea className="form-control" onChange={this.handleDescriptionChange} type="textarea" id="description" placeholder="Description" maxLength="140" rows="7"></textarea>
-                </div>
-
-                <div>
-                    <label htmlFor="photo"><b>Add image:</b></label><br />
-                    <input type="file" onChange={this.handleFileChange} id="photo" name="photo" />
-                </div>
-
-                <button type="button" id="submit" name="submit" onClick={this.onClick} className="btn">Add Advert</button>
+                <button type="button" id="submit" name="submit" onClick={this.onClick} className="btn">Send</button>
             </form>
 
         )

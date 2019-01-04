@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //router
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 //stylesheet
 import './App.css';
 
@@ -14,6 +14,8 @@ import CallAPI from './CallAPI';
 
 import logo from './img/CU_Logo.png';
 import AddMessage from './components/messages/Add';
+import MyMessages from './components/messages/View';
+import Reply from './components/messages/Reply';
 
 
 //new class for App
@@ -29,6 +31,7 @@ class App extends Component {
       adverts: [],
       homeAdverts: [],
       currentAdvert: null,
+      fullAdvert: localStorage.getItem("fullAdvert ")
     };
 
     this.onSearch = this.onSearch.bind(this);
@@ -95,14 +98,12 @@ class App extends Component {
   }
 
 
-  //TODO zobaczyc czy to ma wplyw na odswiezanie
   componentDidMount() {
 
     //fetch the data
     new CallAPI().getAdverts(12, 1, this.updateAdvertData)
 
   }
-
 
   render() {
     let whatToRender
@@ -115,12 +116,16 @@ class App extends Component {
       whatToRender = <Grid adverts={this.state.homeAdverts} colClass="col-m-3" onClick={this.handleAdvertClicked} rowLength={4} />
     }
 
-
     return (
 
       <Router>
         <div>
-          <Header title="My Stuff" updateAdvertData={this.updateAdvertData} logo={logo} onSearchClick={this.onSearch} onClickTitle={this.showHome} />
+          <Header
+            title="My Stuff"
+            updateAdvertData={this.updateAdvertData}
+            logo={logo} onSearchClick={this.onSearch}
+            onClickTitle={this.showHome}
+          />
           <Route path="/" exact render={
             () => {
               return (
@@ -150,20 +155,45 @@ class App extends Component {
           } />
           <Route path="/addAdvert" render={
             () => {
-              return (
-                <div>
-                  <AddAdvert />
-                </div>
-              )
+              let loggedIn = localStorage.getItem("MyStuffLogin")
+              if (loggedIn) {
+                return (
+                  <div>
+                    <AddAdvert />
+                  </div>
+                )
+              } else { return (<Redirect to="/login" />) }
             }
           } />
-          <Route path="/message" render={
+          <Route path="/sendMessage" render={
             () => {
-              return (
-                <div>
-                  <AddMessage />
-                </div>
-              )
+              let loggedIn = localStorage.getItem("MyStuffLogin")
+              if (loggedIn) {
+                return (
+                  <div>
+                    <AddMessage />
+                  </div>
+                )
+              } else { return (<Redirect to="/login" />) }
+            }
+          } />
+          <Route path="/myMessages" render={
+            () => {
+              let loggedIn = localStorage.getItem("MyStuffLogin")
+              if (loggedIn) {
+                return (<MyMessages onClick={this.handleAdvertClicked} />
+                )
+              } else { return (<Redirect to="/login" />) }
+            }
+          } />
+          <Route path="/reply"  render={
+            () => {
+              let loggedIn = localStorage.getItem("MyStuffLogin")
+              if (loggedIn) {
+                return (
+                  <Reply />
+                )
+              } else { return (<Redirect to="/login" />) }
             }
           } />
         </div>

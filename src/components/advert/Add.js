@@ -15,7 +15,8 @@ class AddAdvert extends Component {
             price: '',
             city: '',
             description: '',
-            photo: null
+            photo: null,
+    
         }
 
         this.handleTitleChange = this.handleTitleChange.bind(this)
@@ -49,21 +50,44 @@ class AddAdvert extends Component {
     handleFileChange(e) {
         this.setState({ photo: e.target.files[0] })
     }
-    onClick(e) {
-        e.preventDefault();
-
+    onClick() {
+        //author will be the currently logged in user
         const author = localStorage.getItem("MyStuffLogin")
 
         const fd = new FormData()
         fd.append("author", author)
-        fd.append('title', this.state.title)
-        fd.append('description', this.state.description)
-        fd.append('photo', this.state.photo, this.state.photo.name)
-        fd.append('category', this.state.categoryValue)
-        fd.append('ItemCondition', this.state.conditionValue)
         fd.append('askingPrice', this.state.price)
-        fd.append('city', this.state.city)
 
+        if (this.state.title===''){
+            console.log("Please provide a title")
+            this.setState({title: "errorMsg"})
+        }else{fd.append('title', this.state.title)}
+
+        if (this.state.description===''){
+            console.log("Please provide a description")
+            this.setState({description: "errorMsg"})
+        }else {fd.append('description', this.state.description)}
+        
+        if(!this.state.photo) {
+            console.log("Please upload photo")
+            this.setState({photo: "errorMsg"})
+        }else{fd.append('photo', this.state.photo, this.state.photo.name)}
+
+        if(this.state.categoryValue === ''){
+            console.log("Please provide a category")
+            this.setState({categoryValue: "errorMsg"})
+        }else{fd.append('category', this.state.categoryValue)}
+
+        if(this.state.conditionValue === ''){
+            console.log("Please set the condition of your item")
+            this.setState({conditionValue: "errorMsg"})
+        }else{fd.append('ItemCondition', this.state.conditionValue)}
+
+        if(this.state.city===''){
+            console.log("Please provide a city")
+            this.setState({city: "errorMsg"})
+        }else{fd.append('city', this.state.city)}
+        
 
         new CallAPI().addAdvert(fd)
         .then(res =>{
@@ -71,9 +95,6 @@ class AddAdvert extends Component {
         }).catch(err => {
             console.log(err)
         })
-
-        
-
     }
 
     render() {
@@ -83,12 +104,14 @@ class AddAdvert extends Component {
             <form className="addAdvertForm">
                 <div className="form-group">
                     <label htmlFor="title"><b>Title:</b></label>
-                    <input type="text" onChange={this.handleTitleChange} className="form-control" id="title" name="title" placeholder="Title" />
+                    {this.state.title === "errorMsg" ?<span style={{float: "right", color: "red"}}>Please provide an advert title!</span>: null}
+                    <input type="text" onChange={this.handleTitleChange} className="form-control" id="title" name="title" placeholder="Title" required/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="category"><b>Category:</b></label>
-                    <select id="category" onChange={this.handleCategoryChange}>
+                    {this.state.categoryValue === "errorMsg" ?<span style={{float: "right", color: "red"}}>Please choose an advert category!</span>: null}
+                    <select id="category" onChange={this.handleCategoryChange} required >
                         <option>Select</option>
                         <option value="Electronics">Electronics</option>
                         <option value="Books">Books</option>
@@ -99,7 +122,8 @@ class AddAdvert extends Component {
 
                 <div className="form-group">
                     <label htmlFor="ItemCondition"><b>Condition:</b></label>
-                    <select id="ItemCondition" onChange={this.handleConditionChange}>
+                    {this.state.conditionValue === "errorMsg" ?<span style={{float: "right", color: "red"}}>Please choose item condition!</span>: null}
+                    <select id="ItemCondition" onChange={this.handleConditionChange} required >
                         <option>Select</option>
                         <option value="Brand&nbsp;new">Brand new</option>
                         <option value="Manufacturer&nbsp;refurbished">Manufacturer refurbished</option>
@@ -110,22 +134,25 @@ class AddAdvert extends Component {
 
                 <div className="form-group">
                     <label htmlFor="price"><b>Price (£):</b></label>
-                    <input type="number" onChange={this.handlePriceChange} placeholder="0" min="0" step="1" data-number-to-fixed="2" data-number-stepfactor="100" className="price" id="askingPrice" />
+                    <input type="number" onChange={this.handlePriceChange} placeholder="0" min="0" step="1" data-number-to-fixed="2" data-number-stepfactor="100" className="price" id="askingPrice" required />
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="city"><b>City:</b></label>
-                    <input type="text" onChange={this.handleCityChange} className="form-control" id="city" name="city" placeholder="City" />
+                    {this.state.city === "errorMsg" ?<span style={{float: "right", color: "red"}}>Please provide a city where available!</span>: null}
+                    <input type="text" onChange={this.handleCityChange} className="form-control" id="city" name="city" placeholder="City" required />
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="description"><b>Description:</b></label>
-                    <textarea className="form-control" onChange={this.handleDescriptionChange} type="textarea" id="description" placeholder="Description" maxLength="140" rows="7"></textarea>
+                    {this.state.description === "errorMsg" ?<span style={{float: "right", color: "red"}}>Please provide a description of item!</span>: null}
+                    <textarea className="form-control" onChange={this.handleDescriptionChange} type="textarea" id="description" placeholder="Description" maxLength="2000" rows="7"></textarea>
                 </div>
 
                 <div>
-                    <label htmlFor="photo"><b>Add image:</b></label><br />
-                    <input type="file" onChange={this.handleFileChange} id="photo" name="photo" />
+                    <label htmlFor="photo"><b>Add image:</b></label>
+                    {this.state.photo === "errorMsg" ?<span style={{float: "right", color: "red"}}>Please provide a photo!</span>: null}<br />
+                    <input type="file" onChange={this.handleFileChange} id="photo" name="photo" required />
                 </div>
 
                 <button type="button" id="submit" name="submit" onClick={this.onClick} className="btn">Add Advert</button>

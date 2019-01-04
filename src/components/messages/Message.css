@@ -1,0 +1,27 @@
+
+.messageDate{
+    float: right;
+    margin-top: -20px;
+}
+.replyBarea{
+    padding-left: 1%;
+}
+.replyB {
+    background-color: rgba(128, 128, 128, 0.315);
+    padding: 10px;
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+    border: 0.5px solid black;
+    text-align: center;
+    width: 10%;
+    float: right;
+    margin: -2% 2%
+
+}
+.replyB:hover{
+    border-radius: 10px;    
+    color: white;
+    background-color: black;
+    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

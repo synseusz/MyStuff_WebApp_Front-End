@@ -52,7 +52,7 @@ class Header extends Component {
                     </div>
                 </div>
             </div>
-            <Menu updateAdvertData={this.props.updateAdvertData}/>
+            <Menu updateAdvertData={this.props.updateAdvertData} />
             </div>
             
             
