@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
 import FontAwesome from 'react-fontawesome';
+import Menu from '../menu/Menu'
 
 class Header extends Component {
   
@@ -26,21 +27,22 @@ class Header extends Component {
         this.props.onSearchClick(this.state.searchTerm);  
     }
 
-    handleTitleClick(event){
+    handleTitleClick(){
 
         if(this.props.onClickTitle != null){
             this.props.onClickTitle();
         }
+
             
     }
   
     render() {
 
         return (
-
-            //this is JSX code which is very similar to HTML we already know
+            
+            <div>
             <div className="header" style={this.state.headerStyle}>
-                <img src={this.props.logo} alt="React logo" /><a href="#default" className="logo" onClick={this.handleTitleClick}> {this.props.title}</a>
+                <img src={this.props.logo} alt="React logo" /><a href="/" className="logo" onClick={this.handleTitleClick}>{this.props.title}</a>
                 <div className="header-right">
                     <div className="search-container">
                         <form action="">
@@ -50,6 +52,10 @@ class Header extends Component {
                     </div>
                 </div>
             </div>
+            <Menu updateAdvertData={this.props.updateAdvertData} />
+            </div>
+            
+            
         );
     }
 }

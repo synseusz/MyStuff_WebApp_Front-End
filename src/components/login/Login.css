@@ -9,17 +9,12 @@ h1{
 .warningArea {
     height: 30px;
 }
-.warningAreaBottom {
-    margin-bottom: 15px;
-    text-align: center;
-    color: red;
-}
 .warning {
     text-align: left;
     color: red;
 }
 
-.signupForm {
+.loginForm {
     background-color: lightgray;
     width: 30%;
     margin: 3% auto;
@@ -36,32 +31,22 @@ h1{
     box-sizing: border-box;
 }
 
-input:focus {
-    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    outline: none;
-    border: 1px solid black;
-}
-
-.signupForm button {
+.loginForm button {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
     margin: 8px 0px;
     border: none;
     cursor: pointer;
-    width: 100%
+    width: 100%;
 }
 
-.signupForm button:hover {
+.loginForm button:hover {
     font-weight: bold;
     color: black;
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
-.loginButton {
-    width: 40%;
-    border: 1px solid black;
-}
 p{
     margin: 1%;
 }

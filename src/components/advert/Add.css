@@ -2,75 +2,49 @@
     box-sizing: border-box;
 }
 
-h1{
-    text-align: center;
-    margin-bottom: 10%;
-}
-.warningArea {
-    height: 30px;
-}
-.warningAreaBottom {
-    margin-bottom: 15px;
-    text-align: center;
-    color: red;
-}
-.warning {
-    text-align: left;
-    color: red;
-}
-
-.signupForm {
+.addAdvertForm{
     background-color: lightgray;
-    width: 30%;
-    margin: 3% auto;
+    width: 50%;
+    margin: 4% auto;
     padding: 2%;
     border-radius: 5px;
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
-
-.input {
+#title, #category, #ItemCondition, #askingPrice, #city, #description {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     box-sizing: border-box;
 }
-
-input:focus {
+#category:focus, #ItemCondition:focus, #description:focus{
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     outline: none;
     border: 1px solid black;
 }
 
-.signupForm button {
+#photo{
+    width: 100%;
+    padding: 2%;
+    background-color: white;
+    border:1px solid rgba(156, 154, 154, 0.897);
+}
+.btn {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0px;
+    margin-top: 5%;
     border: none;
     cursor: pointer;
-    width: 100%
+    width: 100%;
 }
-
-.signupForm button:hover {
+.btn:hover {
     font-weight: bold;
     color: black;
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
-
-.loginButton {
-    width: 40%;
-    border: 1px solid black;
-}
-p{
-    margin: 1%;
-}
-
-.buttonsContainer {
+.succesMsg{
     text-align: center;
-}
-
-button:focus {
-    outline: none;
-    border: none;
+    color: green;
+    border: 1px solid black;    
 }

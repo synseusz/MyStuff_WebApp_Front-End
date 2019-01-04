@@ -1,0 +1,82 @@
+.menuBar{
+    overflow: hidden;  
+    background-color: rgba(66, 64, 64, 0.336);  
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 1%;
+    font-size: 15px;
+}
+
+.signupB, .loginB{
+    float: right;
+    margin-right: 0.5em;
+    -moz-box-shadow:inset 0px 1px 0px 0px #a6827e;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a6827e;
+	box-shadow:inset 0px 1px 0px 0px #a6827e;
+	background:-moz-linear-gradient(top, #000000 5%, #9e9e9e 100%);
+	background:-webkit-linear-gradient(top, #000000 5%, #9e9e9e 100%);
+	background:-o-linear-gradient(top, #000000 5%, #9e9e9e 100%);
+	background:-ms-linear-gradient(top, #000000 5%, #9e9e9e 100%);
+	background:linear-gradient(to bottom, #000000 5%, #9e9e9e 100%);
+	background-color:#000000;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid black;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:12px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 50px #4d3534;
+
+}
+.signupB:hover, .loginB:hover, .addAdvertB:hover{
+	background:-moz-linear-gradient(top, #9e9e9e 5%, #000000 100%);
+	background:-webkit-linear-gradient(top, #9e9e9e 5%, #000000 100%);
+	background:-o-linear-gradient(top, #9e9e9e 5%, #000000 100%);
+	background:linear-gradient(to bottom, #9e9e9e 5%, #000000 100%);
+	background-color:#9e9e9e;
+}
+.signupB:active, .loginB:active, .addAdvertB:active {
+    position:relative;
+	top:1px;
+}
+
+.addAdvertB{
+    float: left;
+    margin-left: 0.5em;
+    -moz-box-shadow:inset 0px 1px 0px 0px #a6827e;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a6827e;
+	box-shadow:inset 0px 1px 0px 0px #a6827e;
+	background:-moz-linear-gradient(top, #000000 5%, #9e9e9e 100%);
+	background:-webkit-linear-gradient(top, #000000 5%, #9e9e9e 100%);
+	background:-o-linear-gradient(top, #000000 5%, #9e9e9e 100%);
+	background:linear-gradient(to bottom, #000000 5%, #9e9e9e 100%);
+	background-color:#000000;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid black;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:12px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 50px #4d3534;
+}
+.loggedUser{
+    width: 55%; 
+    max-height: 10px;
+    float: right;
+    text-align: right
+}
+

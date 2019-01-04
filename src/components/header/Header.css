@@ -1,8 +1,8 @@
 .header {  
     overflow: hidden;  
-    background-color: #05386b;  
+    background-color: rgba(17, 19, 34, 0.788);  
     padding: 20px 10px;  
-    position: relative;  
+    position: relative; 
     top: 0;  
     left:0; 
 	  width: 100%;	
@@ -21,14 +21,16 @@
   }  
   
   .header img {  
-    width: 80px; 
+    width: 20%; 
     float: left;  
  }  
   
   .header a.logo {  
     font-size: 25px;  
     font-weight: bold;
-    text-align: center;  
+    text-align: center;
+    margin-left: -3.5%;  
+    margin-top: 0.5%;
   }  
     
   .header a.active {  

@@ -3,6 +3,7 @@ import './Signup.css';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import CallAPI from '../../CallAPI';
+import {Link} from 'react-router-dom'
 
 class Signup extends Component {
 
@@ -10,27 +11,28 @@ class Signup extends Component {
         super(props);
 
         this.state = {
-            currentView: "signup"
+            currentView: "signup",
+            existingUser: "hidden"
         }
         this.onClick = this.onClick.bind(this);
     }
 
-    onClick(){
-        this.setState({currentView:"login"})
+    onClick() {
+        this.setState({ currentView: "login" })
     }
 
     SignupSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email')
-            .required('Required'),
+            .required('Field required'),
         password: Yup.string()
             .min(2, 'Too Short!')
             .max(16, 'Too Long!')
-            .required('Required'),
+            .required('Field required'),
         rePassword: Yup.string()
             .min(2, 'Too Short!')
             .max(16, 'Too Long!')
-            .required('Required')
+            .required('Field required')
             .oneOf([Yup.ref('password'), null]),
     });
 
@@ -41,7 +43,6 @@ class Signup extends Component {
             return (
 
                 <div>
-
                     <Formik
                         initialValues={{
                             email: '',
@@ -56,7 +57,14 @@ class Signup extends Component {
                                 password: values.password
                             }
                             new CallAPI().addUser(data)
-                            this.setState({ currentView: "home" })
+                                .then(response => {
+                                    if (response.status === 201) {
+                                        this.setState({ currentView: "registerSuccessful" })
+                                    }
+                                }).catch(err => {
+                                    this.setState({ existingUser: "visible" })
+                                })
+
                         }}
                     >
                         {({ errors, touched }) => (
@@ -78,18 +86,25 @@ class Signup extends Component {
                                     ) : null}
                                 </div>
 
-                                <label htmlFor="password">rePassword</label>
+                                <label htmlFor="password">Repeat Password</label>
                                 <Field name="rePassword" type="password" className="input" placeholder="Repeat your password" />
                                 <div className="warningArea">
                                     {errors.email && touched.email ? (
                                         <div className="warning">{errors.email}</div>
                                     ) : null}
                                 </div>
+                                
+                                <div className="warningAreaBottom">
+                                {this.state.existingUser === "visible" ? (
+                                    <div><b>User already exists!</b></div>
+                                ) : null
+                                }
+                                </div>
 
                                 <div className="buttonsContainer">
                                     <button type="submit">Submit</button>
                                     <p>Already have account?</p>
-                                    <button onClick={this.onClick} type="button" className="loginButton">Log In</button>
+                                    <Link to="/login"><button onClick={this.onClick} className="loginButton">Log In</button></Link>
                                 </div>
                             </Form>
                         )}
@@ -97,14 +112,9 @@ class Signup extends Component {
                 </div>
             );
         }
-        else if(this.state.currentView === 'home'){
+        else if (this.state.currentView === 'registerSuccessful') {
             return (
                 <h1>Signup complete</h1>
-            )
-        }
-        else if(this.state.currentView === 'login'){
-            return (
-                <h1>Log in</h1>
             )
         }
     }
