@@ -10,7 +10,9 @@ class Reply extends Component {
 
         this.state = {
             subject: "",
-            message: ""
+            message: "",
+            errMsg: false,
+            success: false
         }
 
         this.handleSubjectChange = this.handleSubjectChange.bind(this)
@@ -29,25 +31,36 @@ class Reply extends Component {
         let messageAuthor = localStorage.getItem("messageAuthor")
         let messageREsubject = localStorage.getItem("messageREsubject")
 
-       
-        const message = {
-            author: author,
-            recipient: messageAuthor,
-            subject: "RE: " + messageREsubject,
-            message: this.state.message
-        }
+        if (this.state.message === "") {
+            this.setState({errMsg: true})
+            console.log("Please write your message")
+        } else {
+            const message = {
+                author: author,
+                recipient: messageAuthor,
+                subject: "RE: " + messageREsubject,
+                message: this.state.message
+            }
 
-        console.log(message)
-        new CallAPI().sendMessage(message)
+            new CallAPI().sendMessage(message)
+                .then(res => {
+                    if (res.status === 201) {
+                        this.setState({ success: true })
+                    }
+                    console.log(res);
+                }).catch((error) => {
+                    console.log("the following error has occured:" + error);
+                })
+        }
     }
 
     render() {
 
-        
+
         return (
 
             <form className="addMessageForm">
-            <h1>Reply</h1>
+                <h1>Reply</h1>
                 <div className="form-group">
                     <label htmlFor="subject"><b>Subject:</b></label>
                     <input type="text" onChange={this.handleSubjectChange} className="form-control" id="subject" name="subject" placeholder={"RE: " + localStorage.getItem("messageREsubject")} disabled />
@@ -55,9 +68,10 @@ class Reply extends Component {
 
                 <div className="form-group">
                     <label htmlFor="message"><b>Message:</b></label>
+                    {this.state.errMsg === true & this.state.message==="" ?<span style={{float: "right", color: "red"}}>Please write your message first!</span>: null}
                     <textarea className="form-control" onChange={this.handleMessageChange} type="textarea" id="message" placeholder="Your Message" maxLength="1000" rows="7"></textarea>
                 </div>
-
+                {this.state.success === true ? <p className="succesMsg"><b>Reply to {localStorage.getItem("messageAuthor")} has been sent!</b></p> : null}
                 <button type="button" id="submit" name="submit" onClick={this.onClick} className="btn">Send</button>
             </form>
 

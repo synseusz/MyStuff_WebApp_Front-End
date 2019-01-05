@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom'
 import './Add.css';
 import CallAPI from '../../CallAPI';
 
@@ -104,10 +103,7 @@ class AddAdvert extends Component {
     }
 
     render() {
-        if(this.state.success === true) {
-            window.location.reload()
-            return(<Redirect to="/" />)
-        }
+    
 
         return (
             <div>
@@ -164,9 +160,9 @@ class AddAdvert extends Component {
                         {this.state.photo === "errorMsg" ? <span style={{ float: "right", color: "red" }}>Please provide a photo!</span> : null}<br />
                         <input type="file" onChange={this.handleFileChange} id="photo" name="photo" required />
                     </div>
-
+                    {this.state.success === true ? <p className="succesMsg"><b>Advert has been added!</b></p> : null}
                     <button type="button" id="submit" name="submit" onClick={this.onClick} className="btn">Add Advert</button>
-                    {this.state.success === true ? <p className="succesMsg">Advert has been added!</p> : null}
+                    
                 </form>
                 
             </div>

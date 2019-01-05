@@ -1,7 +1,6 @@
 import axios from 'axios';
 import config from './config';
 
-//this class will have all the methods that we need to connect to the API
 class CallAPI {
 
     login(data){
@@ -18,9 +17,6 @@ class CallAPI {
         })
     }
 
-    logout(data){
-
-    }
     addUser(data){
         let url = config.api_add_user
 
@@ -29,18 +25,7 @@ class CallAPI {
             password: data.password
         })
     }
-    getUser(data){
 
-    }
-    getUsers(data){
-
-    }
-    updateUser(data){
-
-    }
-    deleteUser(data){
-
-    }
     getAdverts(pageLength, pageNumber, callback){
         
         let url = config.api_get_adverts;
@@ -72,12 +57,8 @@ class CallAPI {
 
         }
         )
-      
     }
 
-    getBlog(id){
-
-    }
     addAdvert(data){
         let url = config.api_add_advert
 
@@ -86,26 +67,7 @@ class CallAPI {
     sendMessage(data){
         let url = config.api_send_message
 
-        axios.post(url, data)
-        .then(res => {
-            console.log(res);
-        }).catch( (error) => {
-            console.log("the following error has occured:" + error);
-        });
-    }
-    updateBlog(data){
-
-    }
-    deleteBlog(data){
-
-    }
-    addFavourite(data){
-
-    }
-    deleteFavourite(data){
-
-    }
-    getFavourites(data){
+        return axios.post(url, data)
         
     }
     

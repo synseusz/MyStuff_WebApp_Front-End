@@ -10,14 +10,14 @@
     border-radius: 5px;
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
-#title, #category, #ItemCondition, #askingPrice, #city, #description {
+#title, #category, #ItemCondition, #askingPrice, #city, #description, #message {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     box-sizing: border-box;
 }
-#category:focus, #ItemCondition:focus, #description:focus{
+#category:focus, #ItemCondition:focus, #description:focus, #message:focus{
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     outline: none;
     border: 1px solid black;
@@ -46,5 +46,4 @@
 .succesMsg{
     text-align: center;
     color: green;
-    border: 1px solid black;    
 }

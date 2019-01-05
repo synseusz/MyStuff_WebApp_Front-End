@@ -12,7 +12,8 @@ class AddMessage extends Component {
             subject: "",
             message: "",
             errSub: false,
-            errMsg: false
+            errMsg: false,
+            succes: false
         }
 
         this.handleSubjectChange = this.handleSubjectChange.bind(this)
@@ -46,6 +47,14 @@ class AddMessage extends Component {
             }
 
             new CallAPI().sendMessage(message)
+            .then(res => {
+                if(res.status === 201){
+                    this.setState({success: true})
+                }
+                console.log(res);
+            }).catch( (error) => {
+                console.log("the following error has occured:" + error);
+            })
         }
     }
 
@@ -66,7 +75,7 @@ class AddMessage extends Component {
                     {this.state.errMsg === true & this.state.message==="" ?<span style={{float: "right", color: "red"}}>Please write your message first!</span>: null}
                     <textarea className="form-control" onChange={this.handleMessageChange} type="textarea" id="message" placeholder="Your Message" maxLength="1000" rows="7"></textarea>
                 </div>
-
+                {this.state.success === true ? <p className="succesMsg"><b>Message to {localStorage.getItem("recipient")} has been sent!</b></p> : null}
                 <button type="button" id="submit" name="submit" onClick={this.onClick} className="btn">Send</button>
             </form>
 
