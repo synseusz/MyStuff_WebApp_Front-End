@@ -31,13 +31,12 @@ class CallAPI {
         let url = config.api_get_adverts;
         return axios.get(url,{ 
             headers: {
-                'Access-Control-Allow-Origin': '*',
                 'Content-Type' : 'application/json'        
             }
         }).then(res => {
             callback(res.data);
         }).catch( (error) => {
-            console.log("the following error has occured:" + error);
+            console.log("the following error has occured:" + error.stack);
         });
     }
     delAdvertById(id){
@@ -51,7 +50,6 @@ class CallAPI {
 
         return axios.get(url,{ 
             headers: {
-                'Access-Control-Allow-Origin': '*',
                 'Content-Type' : 'application/json'        
             }
 
