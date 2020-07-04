@@ -1,5 +1,4 @@
 {
-  "homepage": "http://synseusz.github.io/MyStuff_WebApp_Front-End",
   "name": "MyStuffApp",
   "version": "0.3.0",
   "private": true,
@@ -15,8 +14,6 @@
     "yup": "^0.26.6"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
