@@ -12,7 +12,6 @@ import Grid from "./components/grid/Grid";
 import Signup from "./components/signup/Signup";
 import Login from "./components/login/Login";
 import AddAdvert from "./components/advert/Add";
-import CallAPI from "./CallAPI";
 
 import logo from "./img/CU_Logo.png";
 import AddMessage from "./components/messages/Add";
@@ -133,7 +132,6 @@ class App extends Component {
         />
       );
     } else if (this.state.currentView === "home") {
-      console.log(this.state.loadingAdverts);
       whatToRender = (
         <Grid
           adverts={this.state.homeAdverts}
