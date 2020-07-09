@@ -115,7 +115,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-
     //fetch the data
     this.getAdverts(12, 1, this.updateAdvertData);
   }
@@ -162,9 +161,12 @@ class App extends Component {
               return (
                 <>
                   {this.state.loadingAdverts ? (
-                    <div>Retrieving Adverts from API, please wait...</div>
+                    <div className="loader center">
+                      <i className="fa fa-spinner fa-spin" />
+                      <p>Loading adverts, please wait...</p>
+                    </div>
                   ) : (
-                    <div>{ whatToRender }</div>
+                    <div>{whatToRender}</div>
                   )}
                 </>
               );
