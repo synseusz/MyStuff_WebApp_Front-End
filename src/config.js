@@ -1,6 +1,5 @@
 class config  {
-    static cors_proxy_url = 'https://cors-anywhere.herokuapp.com/'
-    static api_host = config.cors_proxy_url + 'https://mystuff-api.herokuapp.com';
+    static api_host = 'https://mystuff-api.herokuapp.com';
     static api_path = '/api/v1.0';
     
     static api_add_user = config.api_host + config.api_path + '/users'

@@ -21,6 +21,7 @@ class Menu extends Component {
     }
     refreshAdverts(){
         new CallAPI().getAdverts(12, 1, this.props.updateAdvertData)
+        
     }
    
 

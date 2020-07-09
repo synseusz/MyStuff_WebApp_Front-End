@@ -36,7 +36,7 @@ class CallAPI {
         }).then(res => {
             callback(res.data);
         }).catch( (error) => {
-            console.log("the following error has occured:" + error.stack);
+            console.log("the following error has occured:" + error);
         });
     }
     delAdvertById(id){
