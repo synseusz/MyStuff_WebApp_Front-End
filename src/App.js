@@ -90,7 +90,7 @@ class App extends Component {
   }
 
   getAdverts(pageLength, pageNumber, callback) {
-    let url = "https://mystuff-api.herokuapp.com/api/v1.0/adverts";
+    let url = "http://159.89.13.14:1337/api/v1.0/adverts";
 
     return axios
       .get(url, {
