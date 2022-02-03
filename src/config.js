@@ -1,5 +1,5 @@
 class config  {
-    static api_host = 'http://159.89.13.14:1337';
+    static api_host = 'https://159.89.13.14:1337';
     static api_path = '/api/v1.0';
     
     static api_add_user = config.api_host + config.api_path + '/users'
