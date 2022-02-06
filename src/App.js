@@ -13,7 +13,7 @@ import Signup from "./components/signup/Signup";
 import Login from "./components/login/Login";
 import AddAdvert from "./components/advert/Add";
 
-import logo from "./img/CU_Logo.png";
+import logo from "./img/logo.png";
 import AddMessage from "./components/messages/Add";
 import MyMessages from "./components/messages/View";
 import Reply from "./components/messages/Reply";
@@ -90,7 +90,7 @@ class App extends Component {
   }
 
   getAdverts(pageLength, pageNumber, callback) {
-    let url = "https://159.89.13.14:1337/api/v1.0/adverts";
+    let url = "http://159.89.13.14:1337/api/v1.0/adverts";
 
     return axios
       .get(url, {

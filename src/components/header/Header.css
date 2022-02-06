@@ -1,86 +1,38 @@
-.header {  
-    overflow: hidden;  
-    background-color: rgba(17, 19, 34, 0.788);  
-    padding: 20px 10px;  
-    position: relative; 
-    top: 0;  
-    left:0; 
-	  width: 100%;	
+.header {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  background: #252426;
+  width: 100%;
+  margin-bottom: 30px;
+  padding: 20px 20px;
   }  
     
-  .header a {  
-    float: left;  
-    color: white;  
-    text-align: center;  
-    padding: 12px;  
-    text-decoration: none;  
-    font-size: 18px;   
-    line-height: 25px;  
-    border-radius: 4px;  
-    
-  }  
-  
-  .header img {  
-    width: 20%; 
-    float: left;  
- }  
-  
-  .header a.logo {  
-    font-size: 25px;  
-    font-weight: bold;
-    text-align: center;
-    margin-left: -3.5%;  
-    margin-top: 0.5%;
-  }  
-    
-  .header a.active {  
-    background: #5CDB95;  
-    color: white;  
-    font-weight: bold;  
-  }  
-    
-  .header-right {  
-    float: right;  
-  }  
-    
-  .header .search-container {  
-    float: left;  
-  }  
-    
-  .header input[type=text] {  
-    padding: 6px;  
-    margin-top: 8px;
-    font-size: 14px;  
-    border: none;  
-  }  
-    
-  .header .search-container button {  
-    float: right;  
-    padding: 6px 10px;  
-    margin-top: 8px;  
-    margin-right: 32px;  
-    background: #ddd;  
-    font-size: 14px;  
-    border: none;  
-    cursor: pointer;  
-  }  
-    
-  .header .search-container button:hover {  
-    background: #ccc;  
-  }  
-  
-  @media screen and (max-width: 600px) {  
-    
-    .header img{  
-        display: block;  
-        float: none;  
-        margin: auto;  
-    }  
-    .header a {  
-      float: none;  
-      display: block;  
-      text-align: center;  
-    } 
-    
-     
-  }  
+.header-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoIcon {
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  margin-right: 10px;
+}
+.logoText {
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}

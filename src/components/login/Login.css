@@ -15,10 +15,14 @@ h1{
 }
 
 .loginForm {
-    background-color: lightgray;
-    width: 30%;
-    margin: 3% auto;
-    padding: 2%;
+    color: #fff;
+    background-color: #252426;
+    width: 50vh;
+    padding:30px;
+    position: fixed;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 5px;
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
@@ -39,23 +43,20 @@ h1{
     border: none;
     cursor: pointer;
     width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+
 }
 
 .loginForm button:hover {
-    font-weight: bold;
+    background: #fff;
     color: black;
-    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    transition: all .3s ease-in-out;
 }
 
-p{
-    margin: 1%;
-}
-
-.buttonsContainer {
+.formButtonsContainer {
     text-align: center;
-}
-
-button:focus {
-    outline: none;
-    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

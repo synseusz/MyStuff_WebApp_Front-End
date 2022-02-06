@@ -20,10 +20,14 @@ h1{
 }
 
 .signupForm {
-    background-color: lightgray;
-    width: 30%;
-    margin: 3% auto;
-    padding: 2%;
+    color: #fff;
+    background-color: #252426;
+    width: 50vh;
+    padding:30px;
+    position: fixed;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -40%);
     border-radius: 5px;
     box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
@@ -49,28 +53,13 @@ input:focus {
     margin: 8px 0px;
     border: none;
     cursor: pointer;
-    width: 100%
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
 .signupForm button:hover {
-    font-weight: bold;
+    background: #fff;
     color: black;
-    box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
-}
-
-.loginButton {
-    width: 40%;
-    border: 1px solid black;
-}
-p{
-    margin: 1%;
-}
-
-.buttonsContainer {
-    text-align: center;
-}
-
-button:focus {
-    outline: none;
-    border: none;
+    transition: all .3s ease-in-out;
 }

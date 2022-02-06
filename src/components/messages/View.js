@@ -43,7 +43,7 @@ class MyMessages extends Component {
 
     render() {
 
-        if (this.state.messageData.length === 0) return <h1>You don't have any messages yet.</h1>
+        if (this.state.messageData.length === 0) return <h1 style={{color: "#fff"}}>You don't have any messages yet.</h1>
 
 
         return (

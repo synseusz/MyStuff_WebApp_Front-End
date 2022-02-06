@@ -106,7 +106,7 @@ class AddAdvert extends Component {
     
 
         return (
-            <div>
+            <div className='formWrapper'>
                 <form className="addAdvertForm">
                     <div className="form-group">
                         <label htmlFor="title"><b>Title:</b></label>

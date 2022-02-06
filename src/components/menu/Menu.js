@@ -29,22 +29,26 @@ class Menu extends Component {
         const loggedin = localStorage.getItem("MyStuffLogin")
         if (loggedin) {
             return (
-                <div className="menuBar">
-                    <NavLink to="/" exact activeStyle={{boxShadow: "0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", border: "1px solid white"}} onClick={this.refreshAdverts} className="addAdvertB">Home</NavLink>
-                    <NavLink to="/addAdvert" activeStyle={{boxShadow: "0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", border: "1px solid white"}} className="addAdvertB">Add Advert</NavLink>
-                    <a href="/" onClick={this.handleLogout} className="loginB">Logout</a>
-                    <NavLink to="/myMessages" activeStyle={{boxShadow: "0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", border: "1px solid white"}} className="signupB">My Messages</NavLink>
-                    <p className="loggedUser">Hello <b>{loggedin}</b></p>
+                <div className="menuBarLoggedin">
+                    <div className='loggedUserContainer'>
+                    <p className="loggedUser"><b>{loggedin}</b></p>
+                    </div>
+                    <div className='buttonsContainer'>
+                    <NavLink to="/" exact onClick={this.refreshAdverts} className="menuBtn">Home</NavLink>
+                    <NavLink to="/addAdvert" className="menuBtn">Add Advert</NavLink>
+                    <NavLink to="/myMessages" className="menuBtn">My Messages</NavLink>
+                    <a href="/" onClick={this.handleLogout} className="menuBtn">Logout</a>
+                    </div>
+                    
                 </div>
             )
         }
         else {
             return (
 
-                <div className="menuBar">
-                    <NavLink to="/" exact activeStyle={{boxShadow: "0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", border: "1px solid white"}} onClick={this.refreshAdverts} className="addAdvertB">Home</NavLink>
-                    <NavLink to="/signup" activeStyle={{boxShadow: "0 1px 12px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", border: "1px solid white"}} className="signupB">Sign Up</NavLink>
-                    <NavLink to="/login" activeStyle={{boxShadow: "0 1px 12px 0 rgba(1, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", border: "1px solid white"}} className="loginB">Log In</NavLink>
+                <div className="menuBarLoggedoff">
+                    <NavLink to="/login" className="menuBtn">Log In</NavLink>
+                    <NavLink to="/signup" className="menuBtn">Sign Up</NavLink>
                 </div>
 
             )

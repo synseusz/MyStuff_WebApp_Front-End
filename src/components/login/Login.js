@@ -88,10 +88,10 @@ class Login extends Component {
                                     }
                                 </div>
 
-                                <div className="buttonsContainer">
+                                <div className="formButtonsContainer">
                                     <button type="submit">Log In</button>
-                                    <p>Don't have account yet?</p>
-                                    <Link to="/signup"><button type="button" className="loginButton">Sign Up</button></Link>
+                                    <p style={{margin: "1%"}}>Don't have account yet?</p>
+                                    <Link to="/signup"><button type="button">Sign Up</button></Link>
                                 </div>
                             </Form>
                         )}

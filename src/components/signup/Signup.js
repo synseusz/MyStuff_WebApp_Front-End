@@ -101,10 +101,10 @@ class Signup extends Component {
                                 }
                             </div>
 
-                            <div className="buttonsContainer">
+                            <div className="formButtonsContainer">
                                 <button type="submit">Submit</button>
-                                <p>Already have account?</p>
-                                <Link to="/login"><button onClick={this.onClick} className="loginButton">Log In</button></Link>
+                                <p style={{margin: "1%"}}>Already have account?</p>
+                                <Link to="/login"><button onClick={this.onClick}>Log In</button></Link>
                             </div>
                         </Form>
                     )}
