@@ -90,7 +90,7 @@ class App extends Component {
   }
 
   getAdverts(pageLength, pageNumber, callback) {
-    let url = "http://159.89.13.14:1337/api/v1.0/adverts";
+    let url = "https://mystuffapi.duckdns.org:6999/api/v1.0/adverts";
 
     return axios
       .get(url, {
