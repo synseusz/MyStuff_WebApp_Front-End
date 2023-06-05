@@ -8,16 +8,14 @@
     float: left;
 }
 .unpublishB{
-    background-color: rgba(189, 184, 184, 0.568);
-    float: right;
+    background-color: #4CAF50;;
     padding: 10px;
     text-decoration: none;
-    color:black;
     font-weight: bold;
-    margin-right: 0.5em;
     border-radius: 10px;
     cursor: pointer;
     outline: none;
+    color: #fff
 }
 .unpublishB:hover{
     background-color: rgba(255, 0, 0, 0.178);

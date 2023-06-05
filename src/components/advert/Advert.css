@@ -4,14 +4,57 @@
     position: relative;
     cursor: pointer;
     background: #252426;
-    height: 100%;
     color: #fff;
     padding-bottom: 10px;
+    width: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
+    transform: scale(1.05);
     box-shadow: 0 8px 16px 0 rgb(0, 0, 0);
 }
+
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.backBtn {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: #4CAF50;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+}
+
+.fullCard {
+    box-shadow: 0 4px 8px 0 rgba(14, 14, 14, 0.726);
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    background: #252426;
+    color: #fff;
+    padding-bottom: 10px;
+    width: 75%;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+}
+
 
 img {
     border-radius: 5px 5px 0 0;
@@ -21,15 +64,17 @@ img {
 .container {
     padding: 2px 16px;
 }
+
 .linkButton {
-    background:none!important;
-    color:inherit;
-    border:none; 
-    padding:0!important;
+    background: none !important;
+    color: inherit;
+    border: none;
+    padding: 0 !important;
     font: inherit;
     /*border is optional*/
     cursor: pointer;
 }
+
 .priceArea {
     padding: 2%;
     font-weight: bold;

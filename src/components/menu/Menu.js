@@ -31,10 +31,9 @@ class Menu extends Component {
             return (
                 <div className="menuBarLoggedin">
                     <div className='loggedUserContainer'>
-                    <p className="loggedUser"><b>{loggedin}</b></p>
+                    <p style={{color: "#fff"}}>Logged in as: <b className="loggedUser">{loggedin}</b></p>
                     </div>
                     <div className='buttonsContainer'>
-                    <NavLink to="/" exact onClick={this.refreshAdverts} className="menuBtn">Home</NavLink>
                     <NavLink to="/addAdvert" className="menuBtn">Add Advert</NavLink>
                     <NavLink to="/myMessages" className="menuBtn">My Messages</NavLink>
                     <a href="/" onClick={this.handleLogout} className="menuBtn">Logout</a>
