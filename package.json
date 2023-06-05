@@ -30,8 +30,7 @@
   ],
   "main": "index.js",
   "devDependencies": {
-    "gh-pages": "^3.0.0",
-    "@babel/plugin-proposal-private-property-in-object": "^1.0.0"
+    "gh-pages": "^3.0.0"
   },
   "keywords": [
     "Piotr Orlowski",
